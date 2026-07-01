@@ -1,0 +1,175 @@
+@import "tailwindcss";
+
+/* ============================================================
+   N.O.X Leads — tema futurista "command center"
+   Paleta: near-black + neon esmeralda/ciano. Glassmorphism,
+   grid de fundo, glows e micro-animações.
+   ============================================================ */
+
+:root {
+  --bg: #05070a;
+  --panel: rgba(255, 255, 255, 0.035);
+  --panel-strong: rgba(255, 255, 255, 0.06);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-soft: rgba(255, 255, 255, 0.05);
+  --text: #e6eaf0;
+  --muted: #8b95a5;
+  --accent: #10b981;
+  --accent-bright: #34d399;
+  --accent2: #22d3ee;
+}
+
+@theme inline {
+  --color-background: var(--bg);
+  --color-foreground: var(--text);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(circle at 12% -10%, rgba(16, 185, 129, 0.14), transparent 42%),
+    radial-gradient(circle at 90% 110%, rgba(34, 211, 238, 0.12), transparent 45%),
+    linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 46px 46px, 46px 46px;
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+/* ---------- Scrollbars finas e discretas ---------- */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
+}
+*::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(52, 211, 153, 0.4);
+}
+
+/* ---------- Componentes utilitários ---------- */
+
+/* Superfície de vidro genérica */
+.glass {
+  background: var(--panel);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border);
+}
+
+/* Texto com leve brilho neon */
+.text-glow {
+  text-shadow: 0 0 18px rgba(52, 211, 153, 0.45);
+}
+
+/* Título em gradiente esmeralda→ciano */
+.accent-gradient {
+  background: linear-gradient(90deg, var(--accent-bright), var(--accent2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Botão neon principal */
+.btn-neon {
+  position: relative;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.9), rgba(34, 211, 238, 0.85));
+  color: #04130d;
+  font-weight: 700;
+  border: 1px solid rgba(52, 211, 153, 0.5);
+  box-shadow: 0 0 0 1px rgba(52, 211, 153, 0.15), 0 8px 24px -10px rgba(16, 185, 129, 0.8);
+  transition: transform 0.15s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+.btn-neon:hover {
+  filter: brightness(1.08);
+  box-shadow: 0 0 0 1px rgba(52, 211, 153, 0.35), 0 10px 30px -8px rgba(34, 211, 238, 0.7);
+  transform: translateY(-1px);
+}
+.btn-neon:disabled {
+  opacity: 0.5;
+  filter: none;
+  box-shadow: none;
+  transform: none;
+}
+
+/* Botão "fantasma" com borda de vidro */
+.btn-ghost {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  transition: color 0.15s ease, border-color 0.2s ease, background 0.2s ease;
+}
+.btn-ghost:hover {
+  color: var(--text);
+  border-color: rgba(52, 211, 153, 0.4);
+  background: var(--panel-strong);
+}
+
+/* Realce de coluna recebendo drop */
+.drop-active {
+  background: rgba(16, 185, 129, 0.06);
+  box-shadow: inset 0 0 0 1px rgba(52, 211, 153, 0.4), inset 0 0 30px -8px rgba(16, 185, 129, 0.5);
+}
+
+/* Card de lead em vidro com glow no hover */
+.lead-card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  border: 1px solid var(--border);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: transform 0.15s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.lead-card:hover {
+  border-color: rgba(52, 211, 153, 0.35);
+  box-shadow: 0 8px 30px -14px rgba(16, 185, 129, 0.7);
+  transform: translateY(-2px);
+}
+
+/* ---------- Animações ---------- */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.6); }
+  50% { opacity: 0.85; box-shadow: 0 0 0 6px rgba(52, 211, 153, 0); }
+}
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes float-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-float-up {
+  animation: float-up 0.35s ease both;
+}
+
+@keyframes scan {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+.scanline::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(52, 211, 153, 0.5), transparent);
+  animation: scan 2.2s linear infinite;
+}
+
+@keyframes spin-ring {
+  to { transform: rotate(360deg); }
+}
+.spin-ring {
+  animation: spin-ring 1s linear infinite;
+}

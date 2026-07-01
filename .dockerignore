@@ -1,0 +1,12 @@
+node_modules
+.next
+.git
+.gitignore
+Dockerfile
+.dockerignore
+npm-debug.log*
+.env*.local
+deploy
+demo-qr.png
+devserver.log
+README.md
