@@ -10,11 +10,13 @@ export default function Column({
   leads,
   onOpenLead,
   onDeleteLead,
+  onToggleRead,
 }: {
   stage: Stage
   leads: Lead[]
   onOpenLead?: (lead: Lead) => void
   onDeleteLead?: (lead: Lead) => void
+  onToggleRead?: (lead: Lead) => void
 }) {
   // A coluna inteira é uma área de drop, para aceitar cards mesmo quando vazia.
   const { setNodeRef, isOver } = useDroppable({
@@ -57,6 +59,7 @@ export default function Column({
               accent={color}
               onOpen={onOpenLead}
               onDelete={onDeleteLead}
+              onToggleRead={onToggleRead}
             />
           ))}
         </SortableContext>

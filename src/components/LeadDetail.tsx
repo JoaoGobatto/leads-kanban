@@ -50,6 +50,15 @@ export default function LeadDetail({
     setConfirmDel(false)
   }, [lead])
 
+  // Abrir o lead marca como lido (some a bolinha).
+  useEffect(() => {
+    if (lead.is_read) return
+    updateLead(lead.id, { is_read: true })
+      .then(onChanged)
+      .catch(() => {})
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lead.id])
+
   // Fecha com ESC.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {

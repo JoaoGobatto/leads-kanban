@@ -20,12 +20,14 @@ export default function LeadCard({
   accent = '#34d399',
   onOpen,
   onDelete,
+  onToggleRead,
 }: {
   lead: Lead
   overlay?: boolean
   accent?: string
   onOpen?: (lead: Lead) => void
   onDelete?: (lead: Lead) => void
+  onToggleRead?: (lead: Lead) => void
 }) {
   const btnRef = useRef<HTMLButtonElement>(null)
   // posição (fixed) do menu quando aberto; null = fechado
@@ -90,11 +92,11 @@ export default function LeadCard({
             {formatPhone(lead.phone)}
           </p>
         </div>
-        {lead.source === 'whatsapp' ? (
+        {!lead.is_read ? (
           <span
-            className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400"
+            className="h-2 w-2 shrink-0 rounded-full bg-emerald-400"
             style={{ boxShadow: '0 0 8px #34d399' }}
-            title="Lead do WhatsApp"
+            title="Não lida"
           />
         ) : null}
       </div>
@@ -130,6 +132,15 @@ export default function LeadCard({
               style={{ position: 'fixed', top: menu.top, right: menu.right }}
               className="z-[56] w-40 overflow-hidden rounded-lg border border-white/10 bg-neutral-900 py-1 shadow-[0_10px_40px_-12px_rgba(0,0,0,0.85)]"
             >
+              <button
+                onClick={() => {
+                  setMenu(null)
+                  onToggleRead?.(lead)
+                }}
+                className="block w-full px-3 py-1.5 text-left text-xs text-neutral-200 hover:bg-white/10"
+              >
+                {lead.is_read ? 'Marcar como não lida' : 'Marcar como lida'}
+              </button>
               <button
                 onClick={() => {
                   setMenu(null)

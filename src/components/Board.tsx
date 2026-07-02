@@ -25,6 +25,7 @@ type Props = {
   onLeadMove?: (leadId: string, toStageId: string, currentLeads: Lead[]) => void
   onOpenLead?: (lead: Lead) => void
   onDeleteLead?: (lead: Lead) => void
+  onToggleRead?: (lead: Lead) => void
   query?: string
 }
 
@@ -34,6 +35,7 @@ export default function Board({
   onLeadMove,
   onOpenLead,
   onDeleteLead,
+  onToggleRead,
   query = '',
 }: Props) {
   const [leads, setLeads] = useState<Lead[]>(initialLeads)
@@ -148,6 +150,7 @@ export default function Board({
             leads={leadsByStage(stage.id)}
             onOpenLead={onOpenLead}
             onDeleteLead={onDeleteLead}
+            onToggleRead={onToggleRead}
           />
         ))}
       </div>

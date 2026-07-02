@@ -12,9 +12,9 @@ export const MOCK_STAGES: Stage[] = [
 ]
 
 export const MOCK_LEADS: Lead[] = [
-  { id: 'l1', name: 'Maria Souza', phone: '5511988887777', photo_url: null, stage_id: 'novo', position: 0, source: 'whatsapp', notes: null, created_at: '2026-06-11T09:00:00Z' },
-  { id: 'l2', name: 'João Pereira', phone: '5521977776666', photo_url: null, stage_id: 'novo', position: 1, source: 'whatsapp', notes: null, created_at: '2026-06-11T09:15:00Z' },
-  { id: 'l3', name: 'Ana Lima', phone: '5531966665555', photo_url: null, stage_id: 'conversa', position: 0, source: 'whatsapp', notes: 'Pediu orçamento', created_at: '2026-06-10T14:00:00Z' },
-  { id: 'l4', name: 'Carlos Mendes', phone: '5541955554444', photo_url: null, stage_id: 'qualificado', position: 0, source: 'whatsapp', notes: null, created_at: '2026-06-09T11:30:00Z' },
-  { id: 'l5', name: 'Beatriz Rocha', phone: '5551944443333', photo_url: null, stage_id: 'fechado', position: 0, source: 'whatsapp', notes: 'Fechou plano anual', created_at: '2026-06-08T16:45:00Z' },
+  { id: 'l1', name: 'Maria Souza', phone: '5511988887777', photo_url: null, stage_id: 'novo', position: 0, source: 'whatsapp', notes: null, is_read: true, created_at: '2026-06-11T09:00:00Z' },
+  { id: 'l2', name: 'João Pereira', phone: '5521977776666', photo_url: null, stage_id: 'novo', position: 1, source: 'whatsapp', notes: null, is_read: true, created_at: '2026-06-11T09:15:00Z' },
+  { id: 'l3', name: 'Ana Lima', phone: '5531966665555', photo_url: null, stage_id: 'conversa', position: 0, source: 'whatsapp', notes: 'Pediu orçamento', is_read: true, created_at: '2026-06-10T14:00:00Z' },
+  { id: 'l4', name: 'Carlos Mendes', phone: '5541955554444', photo_url: null, stage_id: 'qualificado', position: 0, source: 'whatsapp', notes: null, is_read: true, created_at: '2026-06-09T11:30:00Z' },
+  { id: 'l5', name: 'Beatriz Rocha', phone: '5551944443333', photo_url: null, stage_id: 'fechado', position: 0, source: 'whatsapp', notes: 'Fechou plano anual', is_read: true, created_at: '2026-06-08T16:45:00Z' },
 ]

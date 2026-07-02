@@ -2,7 +2,14 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import type { Stage, Lead } from '@/lib/types'
-import { fetchStages, fetchLeads, persistLeadMove, createTestLead, deleteLead } from '@/lib/api'
+import {
+  fetchStages,
+  fetchLeads,
+  persistLeadMove,
+  createTestLead,
+  deleteLead,
+  updateLead,
+} from '@/lib/api'
 import { supabase } from '@/lib/supabase'
 import { useAuth } from './AuthProvider'
 import Board from './Board'
@@ -111,6 +118,18 @@ export default function BoardContainer() {
   // Abre a confirmação in-app (substitui o confirm nativo do navegador).
   function handleDeleteLead(lead: Lead) {
     setPendingDelete(lead)
+  }
+
+  async function handleToggleRead(lead: Lead) {
+    const next = !lead.is_read
+    setLeads((prev) => prev.map((l) => (l.id === lead.id ? { ...l, is_read: next } : l))) // otimista
+    muteRealtimeUntil.current = Date.now() + 1500
+    try {
+      await updateLead(lead.id, { is_read: next })
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Erro ao marcar lead')
+      reloadLeads()
+    }
   }
 
   async function confirmDelete() {
@@ -277,6 +296,7 @@ export default function BoardContainer() {
             onLeadMove={handleLeadMove}
             onOpenLead={(l) => setSelectedId(l.id)}
             onDeleteLead={handleDeleteLead}
+            onToggleRead={handleToggleRead}
             query={query}
           />
         )}

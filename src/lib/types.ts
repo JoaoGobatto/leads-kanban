@@ -17,5 +17,6 @@ export type Lead = {
   position: number
   source: string
   notes: string | null
+  is_read: boolean
   created_at: string
 }

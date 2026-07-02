@@ -13,7 +13,7 @@ export async function fetchStages(): Promise<Stage[]> {
 export async function fetchLeads(): Promise<Lead[]> {
   const { data, error } = await supabase
     .from('leads')
-    .select('id, name, phone, photo_url, stage_id, position, source, notes, created_at')
+    .select('id, name, phone, photo_url, stage_id, position, source, notes, is_read, created_at')
     .order('position', { ascending: true })
     .order('created_at', { ascending: true })
   if (error) throw error
@@ -57,7 +57,7 @@ export async function persistLeadMove(
 // Atualiza campos editáveis de um lead (nome, notas, etapa).
 export async function updateLead(
   id: string,
-  patch: Partial<Pick<Lead, 'name' | 'notes' | 'stage_id'>>,
+  patch: Partial<Pick<Lead, 'name' | 'notes' | 'stage_id' | 'is_read'>>,
 ): Promise<void> {
   const { error } = await supabase.from('leads').update(patch).eq('id', id)
   if (error) throw error
